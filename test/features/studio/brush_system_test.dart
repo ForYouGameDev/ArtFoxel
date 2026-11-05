@@ -25,7 +25,7 @@ SketchStroke _line(BrushPreset brush, {double? pressure, int seed = 1}) =>
 void main() {
   group('built-in brushes', () {
     test('there are at least 11 valid, distinct brushes', () {
-      final all = BuiltInBrushes.all;
+      const all = BuiltInBrushes.all;
       expect(all.length, greaterThanOrEqualTo(11));
       expect(all.map((b) => b.id).toSet().length, all.length);
       expect(all.map((b) => b.name).toSet().length, all.length);

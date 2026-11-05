@@ -172,7 +172,7 @@ extension SketchTransformActions on SketchController {
       _recordStructural(label, () {
         change();
         selection = null; // selections are tied to the old canvas size
-        this._rebuildOverlay();
+        _rebuildOverlay();
       });
     } on ArgumentError catch (error) {
       _notice('${error.message}');
