@@ -150,6 +150,7 @@ void main() {
 
     test('layers, masks, clipping and blend modes survive save and reopen', () async {
       final c = SketchController(data: blank(), rasterize: false);
+      final base = c.activeLayerId;
       _draw(c);
       c.addLayer();
       final top = c.activeLayerId;
@@ -158,6 +159,9 @@ void main() {
       c.setLayerBlend(top, LayerBlend.overlay);
       c.setAlphaLock(top, true);
       await c.addMask(hideAll: true);
+      // Group the base layer. (Grouping the clipped layer itself would clear its
+      // clip on purpose, because a clip must not reach out of its group.)
+      c.selectLayer(base);
       c.groupActive();
       await storage.save('p4', c.data);
       c.dispose();
@@ -167,7 +171,7 @@ void main() {
       expect(layer.blend, LayerBlend.overlay);
       expect(layer.alphaLock, isTrue);
       expect(layer.mask!.bitmap, isNotNull);
-      expect(layer.parentId, isNotNull);
+      expect(loaded.layerById(base)!.parentId, isNotNull);
       expect(loaded.layers.length, 3);
     });
 
