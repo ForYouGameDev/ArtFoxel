@@ -25,7 +25,9 @@ void main() {
           expect(b(LayerBlend.overlay, cb, cs), closeTo(b(LayerBlend.hardLight, cs, cb), 1e-12));
         }
       }
-      expect(b(LayerBlend.overlay, .25, .8), closeTo(1 - 2 * (1 - .25) * (1 - .8), 1e-9));
+      // Dark backdrop multiplies; light backdrop screens (overlay depends on the backdrop).
+      expect(b(LayerBlend.overlay, .25, .8), closeTo(2 * .25 * .8, 1e-9));
+      expect(b(LayerBlend.overlay, .75, .8), closeTo(1 - 2 * (1 - .75) * (1 - .8), 1e-9));
     });
 
     test('colour dodge and burn edge cases', () {
