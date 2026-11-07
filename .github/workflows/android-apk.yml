@@ -1,0 +1,108 @@
+name: Art Foxel Android Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: art-foxel-android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and test Art Foxel APK and AAB
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze Dart
+        run: flutter analyze --no-pub
+
+      - name: Run tests
+        run: flutter test --no-pub
+
+      - name: Build release APK and app bundle
+        run: |
+          flutter build apk --release --no-pub
+          flutter build appbundle --release --no-pub
+
+      - name: Name release files
+        run: |
+          mkdir -p release
+          cp build/app/outputs/flutter-apk/app-release.apk "release/Art Foxel.apk"
+          cp build/app/outputs/bundle/release/app-release.aab "release/Art Foxel.aab"
+
+      - name: Upload Art Foxel APK and AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: Art-Foxel-${{ github.sha }}
+          path: release/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publish APK and AAB to GitHub Releases
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+            RELEASE_TAG="$GITHUB_REF_NAME"
+            RELEASE_TITLE="Art Foxel $GITHUB_REF_NAME"
+            IS_PRERELEASE=false
+          else
+            RELEASE_TAG="build-$GITHUB_RUN_NUMBER-$GITHUB_RUN_ATTEMPT"
+            RELEASE_TITLE="Art Foxel Build $GITHUB_RUN_NUMBER"
+            IS_PRERELEASE=true
+          fi
+
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" \
+              "release/Art Foxel.apk" \
+              "release/Art Foxel.aab" \
+              --clobber \
+              --repo "$GITHUB_REPOSITORY"
+          elif [ "$IS_PRERELEASE" = "true" ]; then
+            gh release create "$RELEASE_TAG" \
+              "release/Art Foxel.apk" \
+              "release/Art Foxel.aab" \
+              --title "$RELEASE_TITLE" \
+              --notes "Automated Art Foxel build from commit $GITHUB_SHA." \
+              --prerelease \
+              --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create "$RELEASE_TAG" \
+              "release/Art Foxel.apk" \
+              "release/Art Foxel.aab" \
+              --title "$RELEASE_TITLE" \
+              --generate-notes \
+              --repo "$GITHUB_REPOSITORY"
+          fi

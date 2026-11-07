@@ -1,0 +1,27 @@
+name: artfoxel
+description: ARTFOXEL creative studio by ShadowArc Games.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.6.1
+  go_router: ^14.8.1
+  file_picker: ^8.1.2
+  path_provider: ^2.1.5
+  shared_preferences: ^2.5.2
+  supabase_flutter: ^2.8.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/branding/app_icon.png
