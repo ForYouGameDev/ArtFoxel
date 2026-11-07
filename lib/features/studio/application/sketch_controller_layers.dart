@@ -60,14 +60,14 @@ extension SketchLayerActions on SketchController {
   void selectLayer(String id) {
     if (data.layerById(id) == null || id == activeLayerId) return;
     if (isDrawing) cancelStroke();
-    if (transformSession != null) this.cancelTransform();
+    if (transformSession != null) cancelTransform();
     activeLayerId = id;
     if (activeLayer.mask == null) editingMask = false;
     _notify();
   }
 
   void addLayer() {
-    if (transformSession != null) this.cancelTransform();
+    if (transformSession != null) cancelTransform();
     _guard(() {
       late SketchLayerData created;
       _recordStructural('Add layer', () {
@@ -119,7 +119,7 @@ extension SketchLayerActions on SketchController {
 
   void deleteLayer(String id) {
     if (data.layerById(id) == null) return;
-    if (transformSession != null) this.cancelTransform();
+    if (transformSession != null) cancelTransform();
     _guard(() {
       _recordStructural('Delete layer', () {
         final next = LayerOps.delete(data, id);

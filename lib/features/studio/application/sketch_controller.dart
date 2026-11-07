@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math' as math;
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
@@ -10,7 +9,6 @@ import '../../../core/diagnostics/app_log.dart';
 import '../domain/affine2d.dart';
 import '../domain/alpha_mask.dart';
 import '../domain/assist_model.dart';
-import '../domain/color_math.dart';
 import '../domain/gradient_model.dart';
 import '../domain/reference_model.dart';
 import '../domain/shape_model.dart';
@@ -402,7 +400,7 @@ class SketchController extends ChangeNotifier {
 
   void undo() {
     if (isDrawing) cancelStroke();
-    if (transformSession != null) this.cancelTransform();
+    if (transformSession != null) cancelTransform();
     if (_undoStack.isEmpty) return;
     final entry = _undoStack.removeLast();
     entry.undo();
@@ -412,7 +410,7 @@ class SketchController extends ChangeNotifier {
 
   void redo() {
     if (isDrawing) cancelStroke();
-    if (transformSession != null) this.cancelTransform();
+    if (transformSession != null) cancelTransform();
     if (_redoStack.isEmpty) return;
     final entry = _redoStack.removeLast();
     entry.redo();
@@ -523,7 +521,7 @@ class SketchController extends ChangeNotifier {
               brush: brush,
               onMask: editingMask && activeLayer.mask != null,
             ),
-      preview: this.transformPreview,
+      preview: transformPreview,
     );
   }
 

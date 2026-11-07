@@ -107,7 +107,7 @@ class _ColorStudioState extends State<ColorStudio> {
     );
   }
 
-  Widget _slider(String label, double v, double max, ValueChanged<double> on, {Gradient? track}) {
+  Widget _slider(String label, double v, double max, ValueChanged<double> on) {
     return Row(children: [
       SizedBox(width: 28, child: Text(label, style: Theme.of(context).textTheme.labelLarge)),
       Expanded(

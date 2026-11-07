@@ -122,6 +122,7 @@ extension SketchSelectionActions on SketchController {
         unawaited(colorRangeAt(doc));
       case SketchTool.draw:
       case SketchTool.eyedropper:
+      case SketchTool.shape:
         break;
     }
     _shapeStart = _shapeCurrent = null;
@@ -526,6 +527,6 @@ extension SketchSelectionActions on SketchController {
           ..color = const Color(0xFF000000),
       );
     }
-    this._paintTransformGuides(canvas, zoom);
+    _paintTransformGuides(canvas, zoom);
   }
 }

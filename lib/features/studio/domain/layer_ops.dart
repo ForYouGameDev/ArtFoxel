@@ -139,7 +139,7 @@ abstract final class LayerOps {
 
   static void _requireRoom(SketchDocumentData doc, [int needed = 1]) {
     if (doc.layers.length + needed > SketchDocumentData.maxLayers) {
-      throw LayerOpException(
+      throw const LayerOpException(
         'A project can have at most ${SketchDocumentData.maxLayers} layers '
         'and groups.',
       );
