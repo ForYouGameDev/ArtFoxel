@@ -8,7 +8,6 @@ import 'package:artfoxel/features/studio/domain/layer_blend.dart';
 import 'package:artfoxel/features/studio/domain/sketch_document_data.dart';
 import 'package:artfoxel/features/studio/domain/stroke_model.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 CanvasInputSample _sample(double x, double y, int ms) => CanvasInputSample(

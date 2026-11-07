@@ -127,7 +127,7 @@ void main() {
     test('blur spreads a bright pixel and does not leak colour from transparent areas', () {
       final src = _img(15, 15, (x, y) => x == 7 && y == 7 ? [255, 0, 0, 255] : [0, 255, 0, 0]);
       final out = FilterEngine.applyOp(src, _op('gaussian', {'radius': 2}));
-      final i = (7 * 15 + 8) * 4;
+      const i = (7 * 15 + 8) * 4;
       expect(out.rgba[i + 3], greaterThan(0));
       expect(out.rgba[i], greaterThan(200)); // still red, premultiplied blur
       expect(out.rgba[i + 1], lessThan(40)); // no green bleeding in

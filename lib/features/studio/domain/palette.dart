@@ -50,7 +50,7 @@ class ColorPalette {
       throw const PaletteException('A palette needs a name.');
     }
     if (colors is! List || colors.length > maxColors) {
-      throw PaletteException('A palette can hold at most $maxColors colours.');
+      throw const PaletteException('A palette can hold at most $maxColors colours.');
     }
     return ColorPalette(
       id: id,

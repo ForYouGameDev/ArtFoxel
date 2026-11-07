@@ -20,19 +20,19 @@ void main() {
     });
 
     test('line ruler projects onto the line', () {
-      final r = const RulerData(kind: RulerKind.line, a: Offset(0, 0), b: Offset(100, 0), snapStrength: 20);
+      const r = RulerData(kind: RulerKind.line, a: Offset(0, 0), b: Offset(100, 0), snapStrength: 20);
       expect(AssistEngine.snapToRuler(const Offset(50, 8), r), const Offset(50, 0));
       expect(AssistEngine.snapToRuler(const Offset(50, 80), r), isNull);
     });
 
     test('circle ruler projects onto the rim', () {
-      final r = const RulerData(kind: RulerKind.circle, a: Offset(0, 0), b: Offset(100, 0), snapStrength: 30);
+      const r = RulerData(kind: RulerKind.circle, a: Offset(0, 0), b: Offset(100, 0), snapStrength: 30);
       final p = AssistEngine.snapToRuler(const Offset(90, 0), r)!;
       expect(p.distance, closeTo(100, 1e-6));
     });
 
     test('parallel ruler snaps to the nearest spaced line', () {
-      final r = const RulerData(kind: RulerKind.parallel, a: Offset(0, 0), b: Offset(100, 0), spacing: 50, snapStrength: 20);
+      const r = RulerData(kind: RulerKind.parallel, a: Offset(0, 0), b: Offset(100, 0), spacing: 50, snapStrength: 20);
       final p = AssistEngine.snapToRuler(const Offset(30, 46), r)!;
       expect(p.dy.abs(), closeTo(50, 1e-6));
     });

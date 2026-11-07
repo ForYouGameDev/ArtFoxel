@@ -136,14 +136,14 @@ class RulerData {
   }
 
   @override
-  bool operator ==(Object o) =>
-      o is RulerData &&
-      o.kind == kind &&
-      o.a == a &&
-      o.b == b &&
-      o.sides == sides &&
-      o.spacing == spacing &&
-      o.snapStrength == snapStrength;
+  bool operator ==(Object other) =>
+      other is RulerData &&
+      other.kind == kind &&
+      other.a == a &&
+      other.b == b &&
+      other.sides == sides &&
+      other.spacing == spacing &&
+      other.snapStrength == snapStrength;
 
   @override
   int get hashCode => Object.hash(kind, a, b, sides, spacing, snapStrength);
@@ -297,8 +297,8 @@ class AssistData {
   }
 
   @override
-  bool operator ==(Object o) =>
-      o is AssistData && _jsonEq(toJson(), o.toJson());
+  bool operator ==(Object other) =>
+      other is AssistData && _jsonEq(toJson(), other.toJson());
 
   @override
   int get hashCode => toJson().toString().hashCode;

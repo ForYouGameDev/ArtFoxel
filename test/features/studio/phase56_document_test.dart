@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 import 'dart:convert';
-import 'dart:ui' show Offset;
 
 import 'package:artfoxel/features/studio/domain/assist_model.dart';
 import 'package:artfoxel/features/studio/domain/canvas_document.dart';

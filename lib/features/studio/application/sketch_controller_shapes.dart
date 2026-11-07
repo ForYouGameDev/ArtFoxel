@@ -80,7 +80,7 @@ extension SketchShapeActions on SketchController {
 
   void _shapeDown(Offset p) {
     if (!_canEditShapes()) return;
-    final zoomSlack = 24.0;
+    const zoomSlack = 24.0;
     // Handle of the selected shape?
     final sel = selectedShape;
     if (sel != null) {
