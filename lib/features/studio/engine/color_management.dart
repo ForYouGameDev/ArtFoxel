@@ -89,7 +89,7 @@ class ColorManagement {
   /// Naive CMYK (no black generation curve, no ink limits, no ICC).
   static Cmyk toCmykNaive(int argb) {
     final r = ((argb >> 16) & 0xFF) / 255, g = ((argb >> 8) & 0xFF) / 255, b = (argb & 0xFF) / 255;
-    final k = 1 - math.max(r, math.max(g, b));
+    final double k = 1.0 - math.max(r, math.max(g, b));
     if (k >= 1) return const Cmyk(0, 0, 0, 1);
     return Cmyk((1 - r - k) / (1 - k), (1 - g - k) / (1 - k), (1 - b - k) / (1 - k), k);
   }

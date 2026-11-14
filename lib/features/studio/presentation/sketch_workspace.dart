@@ -7,7 +7,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/providers.dart';
 import '../../../core/diagnostics/app_log.dart';
-import '../../../core/theme/design_tokens.dart';
 import '../../../core/widgets/artfoxel_components.dart';
 import '../../../core/widgets/unsaved_work_guard.dart';
 import '../../imaging/data/timelapse_store.dart';

@@ -95,10 +95,6 @@ class LayerMaskData {
         inverted: inverted,
         bitmap: bitmap,
         strokes: List.of(strokes),
-        shapes: List.of(shapes),
-        filters: List.of(filters),
-        processed: processed,
-        processedSig: processedSig,
       );
 
   Map<String, Object?> toJson() => {
@@ -208,6 +204,10 @@ class SketchLayerData {
         image: image,
         matrix: matrix,
         strokes: List.of(strokes),
+        shapes: List.of(shapes),
+        filters: List.of(filters),
+        processed: processed,
+        processedSig: processedSig,
       );
 
   Map<String, Object?> toJson() => {

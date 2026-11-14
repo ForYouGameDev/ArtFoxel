@@ -147,8 +147,8 @@ abstract final class ColorMath {
 
   static (double, double, double, double) toCmyk(int argb) {
     final r = red(argb) / 255, g = green(argb) / 255, b = blue(argb) / 255;
-    final k = 1 - math.max(r, math.max(g, b));
-    if (k >= 1) return (0, 0, 0, 1);
+    final double k = 1.0 - math.max(r, math.max(g, b));
+    if (k >= 1) return (0.0, 0.0, 0.0, 1.0);
     return ((1 - r - k) / (1 - k), (1 - g - k) / (1 - k), (1 - b - k) / (1 - k), k);
   }
 

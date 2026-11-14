@@ -338,7 +338,9 @@ class _AnimationStudioScreenState extends ConsumerState<AnimationStudioScreen> w
         }
         _thumbs.put(k, i, i.width * i.height * 4);
         setState(() {});
-      }, onError: (_) => _rendering.remove(k));
+      }, onError: (Object _) {
+        _rendering.remove(k);
+      });
     }
     return null;
   }

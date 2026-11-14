@@ -14,7 +14,6 @@ import '../../imaging/domain/ora_writer.dart';
 import '../domain/affine2d.dart';
 import '../domain/alpha_mask.dart';
 import '../domain/assist_model.dart';
-import '../domain/color_math.dart';
 import '../domain/gradient_model.dart';
 import '../domain/reference_model.dart';
 import '../domain/shape_model.dart';
@@ -167,6 +166,7 @@ class SketchController extends ChangeNotifier {
   int _overlayGeneration = 0;
   SelectionClipboard? clipboard;
   Offset? _shapeStart;
+  Offset? _pinchStart;
   Offset? _shapeCurrent;
   final List<Offset> _shapePoints = [];
 

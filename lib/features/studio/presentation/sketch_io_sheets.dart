@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import '../../imaging/application/export_service.dart';
 import '../../imaging/data/timelapse_store.dart';
 import '../../imaging/domain/export_model.dart';
-import '../../imaging/domain/image_sniffer.dart';
 import '../../imaging/domain/import_rules.dart';
 import '../../imaging/domain/ora_writer.dart';
 import '../../imaging/domain/timelapse.dart';

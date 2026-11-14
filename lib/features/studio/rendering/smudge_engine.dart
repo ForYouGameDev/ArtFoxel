@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/painting.dart';
@@ -21,7 +22,8 @@ abstract final class SmudgeEngine {
   ) {
     final ops = SmudgePlanner.plan(stroke, brush);
     if (ops.isEmpty) return;
-    final matrix = Matrix4.diagonal3Values(1 / scale, 1 / scale, 1).storage;
+    final inv = 1 / scale;
+    final matrix = Float64List.fromList(<double>[inv, 0, 0, 0, 0, inv, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
     final shader = ui.ImageShader(
       source,
       TileMode.decal,

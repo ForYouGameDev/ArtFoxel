@@ -269,7 +269,6 @@ extension SketchManipulateActions on SketchController {
 
   // ---- two-finger pinch on the object -----------------------------------------------
 
-  Offset? _pinchStart;
 
   /// Starts a pinch when both fingers are on the selected object.
   bool manipPinchBegin(Offset focalDoc) {

@@ -125,6 +125,8 @@ extension SketchSelectionActions on SketchController {
         unawaited(colorRangeAt(doc));
       case SketchTool.draw:
       case SketchTool.eyedropper:
+      case SketchTool.shape:
+      case SketchTool.move:
         break;
     }
     _shapeStart = _shapeCurrent = null;

@@ -223,8 +223,8 @@ class NavigatorMath {
       {required double viewW, required double viewH, required double zoom}) {
     final s = scale;
     final cx = tx / s, cy = ty / s;
-    final px = (cx - viewW / zoom / 2).clamp(0.0, math.max(0.0, docW - viewW / zoom));
-    final py = (cy - viewH / zoom / 2).clamp(0.0, math.max(0.0, docH - viewH / zoom));
+    final double px = (cx - viewW / zoom / 2).clamp(0.0, math.max(0.0, docW - viewW / zoom)).toDouble();
+    final double py = (cy - viewH / zoom / 2).clamp(0.0, math.max(0.0, docH - viewH / zoom)).toDouble();
     return (px, py);
   }
 
