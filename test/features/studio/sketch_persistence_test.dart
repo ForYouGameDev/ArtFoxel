@@ -164,7 +164,8 @@ void main() {
       c.dispose();
       final loaded = (await storage.load('p4')).document!;
       final layer = loaded.layerById(top)!;
-      expect(layer.clipToBelow, isTrue);
+      // Grouping resets clip-to-below so a clip never reaches out of its group.
+      expect(layer.clipToBelow, isFalse);
       expect(layer.blend, LayerBlend.overlay);
       expect(layer.alphaLock, isTrue);
       expect(layer.mask!.bitmap, isNotNull);

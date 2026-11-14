@@ -45,7 +45,8 @@ void main() {
       d.loop = true;
       d.setRange(1, 2);
       expect(d.frameAt(t(0)), 1);
-      expect(d.frameAt(t(3)), 2);
+      expect(d.frameAt(t(2)), 2);
+      expect(d.frameAt(t(3)), 1); // loops inside the range
     });
     test('tickSequence repeats held frames', () {
       final d = doc3();

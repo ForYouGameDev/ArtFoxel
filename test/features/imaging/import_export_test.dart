@@ -79,7 +79,12 @@ void main() {
     const o = ExportOptions();
     expect(ExportVerifier.verify(good, o, 8, 4).width, 8);
     expect(() => ExportVerifier.verify(good, o, 9, 4), throwsA(isA<ExportException>()));
-    expect(() => ExportVerifier.verify(_png(8, 4), o, 8, 4), throwsA(isA<ExportException>()));
+    // An RGB (colour type 2) PNG has no alpha channel.
+    final rgb = _png(8, 4);
+    rgb[25] = 2;
+    final crc = PngCodec.crc32(rgb, 12, 29);
+    ByteData.sublistView(rgb).setUint32(29, crc);
+    expect(() => ExportVerifier.verify(rgb, o, 8, 4), throwsA(isA<ExportException>()));
     expect(() => ExportVerifier.verify(good, const ExportOptions(format: ExportFormat.jpeg), 8, 4), throwsA(isA<ExportException>()));
   });
 
