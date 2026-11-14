@@ -44,7 +44,6 @@ class _SketchCanvasStageState extends State<SketchCanvasStage> {
   final Map<int, _ActiveCanvasPointer> _activePointers = {};
   final Map<int, _CanvasStrokeBuilder> _strokeBuilders = {};
   bool _multiPointerNavigation = false;
-  String? _lastInputSummary;
   final Set<int> _stylusPointers = {};
   DateTime? _lastStylusAt;
   int? _eyedropperPointer;
@@ -343,10 +342,6 @@ class _SketchCanvasStageState extends State<SketchCanvasStage> {
       final capabilities = capturedStroke.capabilities;
       widget.controller?.endStroke(sample);
       widget.controller?.noteCapabilities(capabilities);
-      setState(() {
-        _lastInputSummary =
-            '${_deviceName(capturedStroke.kind)} · ${capabilities.label}';
-      });
       widget.onStrokeCaptured?.call(capturedStroke);
     }
     _activePointers.remove(event.pointer);
@@ -441,14 +436,6 @@ class _CanvasStrokeBuilder {
         samples: _samples,
       );
 }
-
-String _deviceName(PointerDeviceKind kind) => switch (kind) {
-      PointerDeviceKind.touch => 'Finger',
-      PointerDeviceKind.stylus => 'Stylus',
-      PointerDeviceKind.invertedStylus => 'Inverted stylus',
-      PointerDeviceKind.mouse => 'Mouse',
-      _ => 'Pointer',
-    };
 
 class _ViewportAction extends StatelessWidget {
   const _ViewportAction({

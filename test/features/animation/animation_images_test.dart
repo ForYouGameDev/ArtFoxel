@@ -3,7 +3,6 @@ import 'dart:typed_data';
 
 import 'package:artfoxel/features/animation/application/animation_image_import.dart';
 import 'package:artfoxel/features/animation/domain/animation_model.dart';
-import 'package:artfoxel/features/imaging/domain/import_rules.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 PreparedAnimImage _p(String n) => PreparedAnimImage(n, 100, 50, Uint8List(0), const []);

@@ -28,12 +28,6 @@ class PatternException implements Exception {
 class PatternGenerator {
   static const maxPlacements = 20000;
 
-  static List<T> _cap<T>(List<T> l) {
-    if (l.length > maxPlacements) {
-      throw PatternException('too many repeats (${l.length} > $maxPlacements)');
-    }
-    return l;
-  }
 
   static List<Placement> grid(double w, double h, double cellW, double cellH,
       {double offsetX = 0, double offsetY = 0}) {

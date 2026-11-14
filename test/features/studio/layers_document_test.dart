@@ -30,7 +30,6 @@ SketchStroke _stroke(SketchDocumentData doc, {double x = 10, double y = 20, doub
 SketchDocumentData _doc() =>
     SketchDocumentData.blank(CanvasDocument(width: 400, height: 300, backgroundColor: null));
 
-List<String> _names(SketchDocumentData d) => [for (final l in d.layers) l.name];
 
 void main() {
   group('LayerOps', () {
